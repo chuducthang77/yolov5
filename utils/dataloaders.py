@@ -498,9 +498,6 @@ class LoadImagesAndLabels(Dataset):
             cache_path = (p if p.is_file() else Path(self.label_files[0]).parent).with_suffix('.cache')
         else:
             cache_path = '../datasets/custom/labels/train.cache'
-        exit()
-        # self.label_files = np.load('../datasets/custom/labels/train/train_Y.npy')
-        # self.im_files = np.load('../datasets/custom/images/train/train_X.npy')
         try:
             cache, exists = np.load(cache_path, allow_pickle=True).item(), True  # load dict
             assert cache['version'] == self.cache_version  # matches current version
@@ -1011,6 +1008,8 @@ def autosplit(path=DATASETS_DIR / 'coco128/images', weights=(0.9, 0.1, 0.0), ann
 def verify_image_label(args):
     # Verify one image-label pair
     im_file, lb_file, prefix = args
+    print(im_file)
+    exit()
     nm, nf, ne, nc, msg, segments = 0, 0, 0, 0, '', []  # number (missing, found, empty, corrupt), message, segments
     try:
         # verify images
