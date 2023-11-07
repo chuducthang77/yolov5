@@ -493,11 +493,10 @@ class LoadImagesAndLabels(Dataset):
             self.label_files = img2label_paths(self.im_files)  # labels
         else:
             self.label_files = list(np.load('../datasets/custom/labels/train/train_Y.npy'))
-            print(self.label_files[0].shape)
-        # print(self.label_files)
-        exit()
 
         cache_path = (p if p.is_file() else Path(self.label_files[0]).parent).with_suffix('.cache')
+        print(cache_path)
+        exit()
         # self.label_files = np.load('../datasets/custom/labels/train/train_Y.npy')
         # self.im_files = np.load('../datasets/custom/images/train/train_X.npy')
         try:
