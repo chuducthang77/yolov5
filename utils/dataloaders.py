@@ -1018,7 +1018,7 @@ def verify_image_label(args):
         else:
             im = im_file.reshape(64, 64, 3)
             shape = 64, 64
-
+        print(shape)
         exit()
         assert (shape[0] > 9) & (shape[1] > 9), f'image size {shape} <10 pixels'
         assert im.format.lower() in IMG_FORMATS, f'invalid image format {im.format}'
