@@ -626,7 +626,7 @@ class LoadImagesAndLabels(Dataset):
         x = {}  # dict
         nm, nf, ne, nc, msgs = 0, 0, 0, 0, []  # number missing, found, empty, corrupt, messages
         desc = f'{prefix}Scanning {path.parent / path.stem}...'
-        print(self.label_files)
+        # print(self.label_files)
         with Pool(NUM_THREADS) as pool:
             pbar = tqdm(pool.imap(verify_image_label, zip(self.im_files, self.label_files, repeat(prefix))),
                         desc=desc,
@@ -1009,9 +1009,6 @@ def autosplit(path=DATASETS_DIR / 'coco128/images', weights=(0.9, 0.1, 0.0), ann
 def verify_image_label(args):
     # Verify one image-label pair
     im_file, lb_file, prefix = args
-    print('Hereeeeeeee')
-    print(lb_file)
-    exit()
     nm, nf, ne, nc, msg, segments = 0, 0, 0, 0, '', []  # number (missing, found, empty, corrupt), message, segments
     try:
         # verify images
@@ -1023,13 +1020,13 @@ def verify_image_label(args):
             im = im_file.reshape(64, 64, 3)
             shape = 64, 64
         assert (shape[0] > 9) & (shape[1] > 9), f'image size {shape} <10 pixels'
-        assert im.format.lower() in IMG_FORMATS, f'invalid image format {im.format}'
-        if im.format.lower() in ('jpg', 'jpeg'):
-            with open(im_file, 'rb') as f:
-                f.seek(-2, 2)
-                if f.read() != b'\xff\xd9':  # corrupt JPEG
-                    ImageOps.exif_transpose(Image.open(im_file)).save(im_file, 'JPEG', subsampling=0, quality=100)
-                    msg = f'{prefix}WARNING ⚠️ {im_file}: corrupt JPEG restored and saved'
+        # assert im.format.lower() in IMG_FORMATS, f'invalid image format {im.format}'
+        # if im.format.lower() in ('jpg', 'jpeg'):
+        #     with open(im_file, 'rb') as f:
+        #         f.seek(-2, 2)
+        #         if f.read() != b'\xff\xd9':  # corrupt JPEG
+        #             ImageOps.exif_transpose(Image.open(im_file)).save(im_file, 'JPEG', subsampling=0, quality=100)
+        #             msg = f'{prefix}WARNING ⚠️ {im_file}: corrupt JPEG restored and saved'
         # verify labels
         print(lb_file)
         exit()
