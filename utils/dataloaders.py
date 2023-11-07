@@ -489,13 +489,13 @@ class LoadImagesAndLabels(Dataset):
         # Check cache
         self.label_files = img2label_paths(self.im_files)  # labels
         cache_path = (p if p.is_file() else Path(self.label_files[0]).parent).with_suffix('.cache')
-        print(cache_path)
-        exit()
         # self.label_files = np.load('../datasets/custom/labels/train/train_Y.npy')
         # self.im_files = np.load('../datasets/custom/images/train/train_X.npy')
 
         try:
             cache, exists = np.load(cache_path, allow_pickle=True).item(), True  # load dict
+            print(cache)
+            exit()
             assert cache['version'] == self.cache_version  # matches current version
             assert cache['hash'] == get_hash(self.label_files + self.im_files)  # identical hash
         except Exception:
