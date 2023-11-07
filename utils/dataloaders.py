@@ -431,7 +431,7 @@ def img2label_paths(img_paths):
     if len(img_paths) > 1:
         return [sb.join(x.rsplit(sa, 1)).rsplit('.', 1)[0] + '.txt' for x in img_paths]
     else:
-        print( sb.join(img_paths[0].rsplit(sa, 1)) )
+        print( sb.join(img_paths[0].rsplit(sa, 1)).rsplit('.', 1)[0] )
         return None
         # return [sb.join(x.rsplit(sa, 1)).rsplit('.', 1)[0] + '.npy' for x in img_paths]
 
