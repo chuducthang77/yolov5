@@ -637,11 +637,10 @@ class LoadImagesAndLabels(Dataset):
                 nf += nf_f
                 ne += ne_f
                 nc += nc_f
-                print(im_file)
-                print('Hereeeeeee')
-                exit()
-                if im_file:
+                if im_file and type(im_file) == str:
                     x[im_file] = [lb, shape, segments]
+                elif im_file and type(im_file) != str:
+                    x[str(im_file)] = [lb, shape, segments]
                 if msg:
                     msgs.append(msg)
                 pbar.desc = f'{desc} {nf} images, {nm + ne} backgrounds, {nc} corrupt'
