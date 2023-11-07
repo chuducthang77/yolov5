@@ -481,6 +481,9 @@ class LoadImagesAndLabels(Dataset):
                     raise FileNotFoundError(f'{prefix}{p} does not exist')
             # f is a list contain image filename
             self.im_files = sorted(x.replace('/', os.sep) for x in f if x.split('.')[-1].lower() in IMG_FORMATS)
+            print(f)
+            print(p)
+            exit()
             # self.im_files = f
             # self.img_files = sorted([x for x in f if x.suffix[1:].lower() in IMG_FORMATS])  # pathlib
             assert self.im_files, f'{prefix}No images found'
@@ -493,10 +496,6 @@ class LoadImagesAndLabels(Dataset):
         # self.im_files = np.load('../datasets/custom/images/train/train_X.npy')
         try:
             cache, exists = np.load(cache_path, allow_pickle=True).item(), True  # load dict
-            print(cache)
-            print(cache_path)
-            print(p)
-            exit()
             assert cache['version'] == self.cache_version  # matches current version
             assert cache['hash'] == get_hash(self.label_files + self.im_files)  # identical hash
         except Exception:
@@ -516,14 +515,9 @@ class LoadImagesAndLabels(Dataset):
         [cache.pop(k) for k in ('hash', 'version', 'msgs')]  # remove items
         # print(*cache.values())
         labels, shapes, self.segments = zip(*cache.values())
-        # print(labels)
-        # print(len(labels))
-        # print(len(shapes))
-        # print(self.segments)
         nl = len(np.concatenate(labels, 0))  # number of labels
         assert nl > 0 or not augment, f'{prefix}All labels empty in {cache_path}, can not start training. {HELP_URL}'
 
-        exit()
         self.labels = list(labels)
         # self.labels = np.load('../datasets/custom/labels/train/train_Y.npy')
         self.shapes = np.array(shapes)
