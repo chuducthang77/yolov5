@@ -1028,8 +1028,6 @@ def verify_image_label(args):
         #             ImageOps.exif_transpose(Image.open(im_file)).save(im_file, 'JPEG', subsampling=0, quality=100)
         #             msg = f'{prefix}WARNING ⚠️ {im_file}: corrupt JPEG restored and saved'
         # verify labels
-        print(lb_file)
-        exit()
         if type(lb_file) != str:
             nf = 1
             lb = np.array(lb_file, dtype=np.float32)
@@ -1037,22 +1035,21 @@ def verify_image_label(args):
             nl = len(lb)
             print(lb, nl)
             exit()
-            # if nl:
-            #     # assert lb.shape[1] == 5, f'labels require 5 columns, {lb.shape[1]} columns detected'
-            #     # assert (lb >= 0).all(), f'negative label values {lb[lb < 0]}'
-            #     # assert (lb[:, 1:] <= 1).all(), f'non-normalized or out of bounds coordinates {lb[:, 1:][lb[:, 1:] > 1]}'
-            #     _, i = np.unique(lb, axis=0, return_index=True)
-            #     if len(i) < nl:  # duplicate row check
-            #         lb = lb[i]  # remove duplicates
-            #         msg = f'{prefix}WARNING ⚠️ {im_file}: {nl - len(i)} duplicate labels removed'
-            #     else:
-            #         ne = 1  # label empty
-            #         lb = np.zeros((0, 5), dtype=np.float32)
-            # else:
-            #     nm = 1  # label missing
-            #     lb = np.zeros((0, 5), dtype=np.float32)
-            # print(im_file, lb, shape, segments, nm, nf, ne, nc, msg)
-            # return im_file, lb, shape, segments, nm, nf, ne, nc, msg
+            if nl:
+                # assert lb.shape[1] == 5, f'labels require 5 columns, {lb.shape[1]} columns detected'
+                # assert (lb >= 0).all(), f'negative label values {lb[lb < 0]}'
+                # assert (lb[:, 1:] <= 1).all(), f'non-normalized or out of bounds coordinates {lb[:, 1:][lb[:, 1:] > 1]}'
+                _, i = np.unique(lb, axis=0, return_index=True)
+                if len(i) < nl:  # duplicate row check
+                    lb = lb[i]  # remove duplicates
+                    msg = f'{prefix}WARNING ⚠️ {im_file}: {nl - len(i)} duplicate labels removed'
+                else:
+                    ne = 1  # label empty
+                    lb = np.zeros((0, 5), dtype=np.float32)
+            else:
+                nm = 1  # label missing
+                lb = np.zeros((0, 5), dtype=np.float32)
+            return im_file, lb, shape, segments, nm, nf, ne, nc, msg
 
         else:
             if os.path.isfile(lb_file):
