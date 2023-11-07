@@ -637,6 +637,8 @@ class LoadImagesAndLabels(Dataset):
                 nf += nf_f
                 ne += ne_f
                 nc += nc_f
+                print(im_file)
+                exit()
                 if im_file:
                     x[im_file] = [lb, shape, segments]
                 if msg:
@@ -1077,8 +1079,6 @@ def verify_image_label(args):
                 nm = 1  # label missing
                 lb = np.zeros((0, 5), dtype=np.float32)
 
-            print(im_file, lb, shape, segments, nm, nf, ne, nc, msg)
-            exit()
             return im_file, lb, shape, segments, nm, nf, ne, nc, msg
     except Exception as e:
         nc = 1
