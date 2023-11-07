@@ -494,9 +494,6 @@ class LoadImagesAndLabels(Dataset):
 
         try:
             cache, exists = np.load(cache_path, allow_pickle=True).item(), True  # load dict
-            print(cache[1])
-            print(len(cache))
-            exit()
             assert cache['version'] == self.cache_version  # matches current version
             assert cache['hash'] == get_hash(self.label_files + self.im_files)  # identical hash
         except Exception:
@@ -504,6 +501,13 @@ class LoadImagesAndLabels(Dataset):
 
         # Display cache
         nf, nm, ne, nc, n = cache.pop('results')  # found, missing, empty, corrupt, total
+        print(nf)
+        print(nm)
+        print(ne)
+        print(nc)
+        print(n)
+        exit()
+
         if exists and LOCAL_RANK in {-1, 0}:
             d = f'Scanning {cache_path}... {nf} images, {nm + ne} backgrounds, {nc} corrupt'
             tqdm(None, desc=prefix + d, total=n, initial=n, bar_format=TQDM_BAR_FORMAT)  # display cache results
