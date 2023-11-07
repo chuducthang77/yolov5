@@ -492,7 +492,6 @@ class LoadImagesAndLabels(Dataset):
         # self.label_files = np.load('../datasets/custom/labels/train/train_Y.npy')
         # self.im_files = np.load('../datasets/custom/images/train/train_X.npy')
         try:
-            cache_path = '../datasets/custom/images/train.cache'
             cache, exists = np.load(cache_path, allow_pickle=True).item(), True  # load dict
             print(cache)
             exit()
