@@ -501,7 +501,7 @@ class LoadImagesAndLabels(Dataset):
         try:
             cache, exists = np.load(cache_path, allow_pickle=True).item(), True  # load dict
             assert cache['version'] == self.cache_version  # matches current version
-            assert cache['hash'] == get_hash(self.label_files + self.im_files)  # identical hash
+            # assert cache['hash'] == get_hash(self.label_files + self.im_files)  # identical hash
         except Exception:
             cache, exists = self.cache_labels(cache_path, prefix), False  # run cache ops
 
@@ -650,7 +650,7 @@ class LoadImagesAndLabels(Dataset):
             LOGGER.info('\n'.join(msgs))
         if nf == 0:
             LOGGER.warning(f'{prefix}WARNING ⚠️ No labels found in {path}. {HELP_URL}')
-        x['hash'] = get_hash(self.label_files + self.im_files)
+        # x['hash'] = get_hash(self.label_files + self.im_files)
         x['results'] = nf, nm, ne, nc, len(self.im_files)
         x['msgs'] = msgs  # warnings
         x['version'] = self.cache_version  # cache version
