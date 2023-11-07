@@ -428,8 +428,10 @@ class LoadStreams:
 def img2label_paths(img_paths):
     # Define label paths as a function of image paths
     sa, sb = f'{os.sep}images{os.sep}', f'{os.sep}labels{os.sep}'  # /images/, /labels/ substrings
-    # return [sb.join(x.rsplit(sa, 1)).rsplit('.', 1)[0] + '.txt' for x in img_paths]
-    return [sb.join(x.rsplit(sa, 1)).rsplit('.', 1)[0] + '.npy' for x in img_paths]
+    if len(img_paths) > 0:
+        return [sb.join(x.rsplit(sa, 1)).rsplit('.', 1)[0] + '.txt' for x in img_paths]
+    else:
+        return [sb.join(x.rsplit(sa, 1)).rsplit('.', 1)[0] + '.npy' for x in img_paths]
 
 
 
@@ -478,8 +480,8 @@ class LoadImagesAndLabels(Dataset):
                 else:
                     raise FileNotFoundError(f'{prefix}{p} does not exist')
             # f is a list contain image filename
-            # self.im_files = sorted(x.replace('/', os.sep) for x in f if x.split('.')[-1].lower() in IMG_FORMATS)
-            self.im_files = f
+            self.im_files = sorted(x.replace('/', os.sep) for x in f if x.split('.')[-1].lower() in IMG_FORMATS)
+            # self.im_files = f
             # self.img_files = sorted([x for x in f if x.suffix[1:].lower() in IMG_FORMATS])  # pathlib
             assert self.im_files, f'{prefix}No images found'
         except Exception as e:
