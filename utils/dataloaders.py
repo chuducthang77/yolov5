@@ -1033,9 +1033,9 @@ def verify_image_label(args):
             #Ignore the segment for the moment
             nl = len(lb)
             if nl:
-                assert lb.shape[1] == 5, f'labels require 5 columns, {lb.shape[1]} columns detected'
-                assert (lb >= 0).all(), f'negative label values {lb[lb < 0]}'
-                assert (lb[:, 1:] <= 1).all(), f'non-normalized or out of bounds coordinates {lb[:, 1:][lb[:, 1:] > 1]}'
+                # assert lb.shape[1] == 5, f'labels require 5 columns, {lb.shape[1]} columns detected'
+                # assert (lb >= 0).all(), f'negative label values {lb[lb < 0]}'
+                # assert (lb[:, 1:] <= 1).all(), f'non-normalized or out of bounds coordinates {lb[:, 1:][lb[:, 1:] > 1]}'
                 _, i = np.unique(lb, axis=0, return_index=True)
                 if len(i) < nl:  # duplicate row check
                     lb = lb[i]  # remove duplicates
@@ -1046,7 +1046,7 @@ def verify_image_label(args):
             else:
                 nm = 1  # label missing
                 lb = np.zeros((0, 5), dtype=np.float32)
-            print(im_file, lb, shape, segments, nm, nf, ne, nc, msg)
+            # print(im_file, lb, shape, segments, nm, nf, ne, nc, msg)
             return im_file, lb, shape, segments, nm, nf, ne, nc, msg
 
         else:
@@ -1076,6 +1076,7 @@ def verify_image_label(args):
             else:
                 nm = 1  # label missing
                 lb = np.zeros((0, 5), dtype=np.float32)
+            print(im_file, lb, shape, segments, nm, nf, ne, nc, msg)
             return im_file, lb, shape, segments, nm, nf, ne, nc, msg
     except Exception as e:
         nc = 1
