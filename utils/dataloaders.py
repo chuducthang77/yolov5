@@ -480,7 +480,8 @@ class LoadImagesAndLabels(Dataset):
             assert self.im_files, f'{prefix}No images found'
         except Exception as e:
             raise Exception(f'{prefix}Error loading data from {path}: {e}\n{HELP_URL}') from e
-
+        print(self.im_files)
+        exit()
         # Check cache
         self.label_files = img2label_paths(self.im_files)  # labels
         cache_path = (p if p.is_file() else Path(self.label_files[0]).parent).with_suffix('.cache')
@@ -507,9 +508,6 @@ class LoadImagesAndLabels(Dataset):
         assert nl > 0 or not augment, f'{prefix}All labels empty in {cache_path}, can not start training. {HELP_URL}'
         self.labels = list(labels)
         # self.labels = np.load('../datasets/custom/labels/train/train_Y.npy')
-        print(shapes)
-        print(cache.keys())
-        exit()
         self.shapes = np.array(shapes)
         self.im_files = list(cache.keys())  # update
         self.label_files = img2label_paths(cache.keys())  # update
