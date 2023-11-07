@@ -1014,11 +1014,12 @@ def verify_image_label(args):
         if 'jpg' in im_file:
             im = Image.open(im_file)
             im.verify()  # PIL verify
+            shape = exif_size(im)  # image size
         else:
             im = im_file.reshape(64, 64, 3)
-        shape = exif_size(im)  # image size
+            shape = None
         print(shape)
-        print(im.shape)
+
         exit()
         assert (shape[0] > 9) & (shape[1] > 9), f'image size {shape} <10 pixels'
         assert im.format.lower() in IMG_FORMATS, f'invalid image format {im.format}'
