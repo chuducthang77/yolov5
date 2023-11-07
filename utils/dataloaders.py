@@ -638,6 +638,7 @@ class LoadImagesAndLabels(Dataset):
                 ne += ne_f
                 nc += nc_f
                 print(im_file)
+                print('Hereeeeeee')
                 exit()
                 if im_file:
                     x[im_file] = [lb, shape, segments]
