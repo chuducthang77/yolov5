@@ -494,7 +494,7 @@ class LoadImagesAndLabels(Dataset):
 
         try:
             cache, exists = np.load(cache_path, allow_pickle=True).item(), True  # load dict
-            print(cache[0])
+            print(cache)
             exit()
             assert cache['version'] == self.cache_version  # matches current version
             assert cache['hash'] == get_hash(self.label_files + self.im_files)  # identical hash
