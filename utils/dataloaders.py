@@ -1048,6 +1048,7 @@ def verify_image_label(args):
                 nm = 1  # label missing
                 lb = np.zeros((0, 5), dtype=np.float32)
             print(im_file, lb, shape, segments, nm, nf, ne, nc, msg)
+            exit()
             return im_file, lb, shape, segments, nm, nf, ne, nc, msg
 
         else:
