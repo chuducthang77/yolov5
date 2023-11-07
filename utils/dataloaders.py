@@ -486,6 +486,8 @@ class LoadImagesAndLabels(Dataset):
             else:
                 self.im_files = list(np.load('../datasets/custom/images/train/train_X.npy'))
             print(self.im_files)
+            print(f)
+            print(f[0])
             exit()
             assert self.im_files, f'{prefix}No images found'
         except Exception as e:
