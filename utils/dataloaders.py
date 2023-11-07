@@ -1033,8 +1033,6 @@ def verify_image_label(args):
             lb = np.array(lb_file, dtype=np.float32)
             #Ignore the segment for the moment
             nl = len(lb)
-            print(lb, nl)
-            exit()
             if nl:
                 # assert lb.shape[1] == 5, f'labels require 5 columns, {lb.shape[1]} columns detected'
                 # assert (lb >= 0).all(), f'negative label values {lb[lb < 0]}'
@@ -1049,6 +1047,7 @@ def verify_image_label(args):
             else:
                 nm = 1  # label missing
                 lb = np.zeros((0, 5), dtype=np.float32)
+            print(im_file, lb, shape, segments, nm, nf, ne, nc, msg)
             return im_file, lb, shape, segments, nm, nf, ne, nc, msg
 
         else:
