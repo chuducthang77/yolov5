@@ -510,6 +510,9 @@ class LoadImagesAndLabels(Dataset):
         print(*cache.values())
         labels, shapes, self.segments = zip(*cache.values())
         print(labels)
+        print(len(labels))
+        print(len(shapes))
+        print(self.segments)
         nl = len(np.concatenate(labels, 0))  # number of labels
         assert nl > 0 or not augment, f'{prefix}All labels empty in {cache_path}, can not start training. {HELP_URL}'
 
