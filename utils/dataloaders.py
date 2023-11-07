@@ -1017,8 +1017,7 @@ def verify_image_label(args):
             shape = exif_size(im)  # image size
         else:
             im = im_file.reshape(64, 64, 3)
-            shape = None
-        print(shape)
+            shape = 64, 64
 
         exit()
         assert (shape[0] > 9) & (shape[1] > 9), f'image size {shape} <10 pixels'
