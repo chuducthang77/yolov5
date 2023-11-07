@@ -637,9 +637,9 @@ class LoadImagesAndLabels(Dataset):
                 nf += nf_f
                 ne += ne_f
                 nc += nc_f
-                if im_file and type(im_file) == str:
+                if type(im_file) == str:
                     x[im_file] = [lb, shape, segments]
-                elif im_file and type(im_file) != str:
+                elif type(im_file) != str:
                     x[str(im_file)] = [lb, shape, segments]
                 if msg:
                     msgs.append(msg)
