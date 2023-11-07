@@ -484,9 +484,9 @@ class LoadImagesAndLabels(Dataset):
             # self.im_files = f
             # self.img_files = sorted([x for x in f if x.suffix[1:].lower() in IMG_FORMATS])  # pathlib
             self.im_files = np.load('../datasets/custom/images/train/train_X.npy')
-            print(self.im_files)
+            print(self.im_files.shape)
             self.im_files = list(self.im_files)
-            print(self.im_files)
+            print(self.im_files[0].shape)
             exit()
             assert self.im_files, f'{prefix}No images found'
         except Exception as e:
