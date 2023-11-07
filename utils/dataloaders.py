@@ -428,9 +428,10 @@ class LoadStreams:
 def img2label_paths(img_paths):
     # Define label paths as a function of image paths
     sa, sb = f'{os.sep}images{os.sep}', f'{os.sep}labels{os.sep}'  # /images/, /labels/ substrings
-    if len(img_paths) > 0:
+    if len(img_paths) > 1:
         return [sb.join(x.rsplit(sa, 1)).rsplit('.', 1)[0] + '.txt' for x in img_paths]
     else:
+        print(sb.join(x.rsplit(sa, 1)))
         return [sb.join(x.rsplit(sa, 1)).rsplit('.', 1)[0] + '.npy' for x in img_paths]
 
 
