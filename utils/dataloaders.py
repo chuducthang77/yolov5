@@ -627,7 +627,6 @@ class LoadImagesAndLabels(Dataset):
         nm, nf, ne, nc, msgs = 0, 0, 0, 0, []  # number missing, found, empty, corrupt, messages
         desc = f'{prefix}Scanning {path.parent / path.stem}...'
         print(self.label_files)
-        exit()
         with Pool(NUM_THREADS) as pool:
             pbar = tqdm(pool.imap(verify_image_label, zip(self.im_files, self.label_files, repeat(prefix))),
                         desc=desc,
@@ -1010,6 +1009,9 @@ def autosplit(path=DATASETS_DIR / 'coco128/images', weights=(0.9, 0.1, 0.0), ann
 def verify_image_label(args):
     # Verify one image-label pair
     im_file, lb_file, prefix = args
+    print('Hereeeeeeee')
+    print(lb_file)
+    exit()
     nm, nf, ne, nc, msg, segments = 0, 0, 0, 0, '', []  # number (missing, found, empty, corrupt), message, segments
     try:
         # verify images
