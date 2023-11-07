@@ -480,11 +480,12 @@ class LoadImagesAndLabels(Dataset):
                 else:
                     raise FileNotFoundError(f'{prefix}{p} does not exist')
             # f is a list contain image filename
-            if f[0].split('.')[-1].lower() == '.jpeg' or if x.split('.')[-1].lower() == '.jpg':
+            if f[0].split('.')[-1].lower() == '.jpeg' or  f[0].split('.')[-1].lower() == '.jpg':
                 self.im_files = sorted(x.replace('/', os.sep) for x in f if x.split('.')[-1].lower() in IMG_FORMATS)
             # self.img_files = sorted([x for x in f if x.suffix[1:].lower() in IMG_FORMATS])  # pathlib
             else:
                 self.im_files = list(np.load('../datasets/custom/images/train/train_X.npy'))
+            print(self.im_files)
             exit()
             assert self.im_files, f'{prefix}No images found'
         except Exception as e:
