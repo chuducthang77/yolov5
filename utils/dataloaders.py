@@ -485,16 +485,17 @@ class LoadImagesAndLabels(Dataset):
             # self.img_files = sorted([x for x in f if x.suffix[1:].lower() in IMG_FORMATS])  # pathlib
             else:
                 self.im_files = list(np.load('../datasets/custom/images/train/train_X.npy'))
-            print(self.im_files)
-            print(f)
-            print(f[0])
-            exit()
             assert self.im_files, f'{prefix}No images found'
         except Exception as e:
             raise Exception(f'{prefix}Error loading data from {path}: {e}\n{HELP_URL}') from e
         # Check cache
-        # self.label_files = img2label_paths(self.im_files)  # labels
-        self.label_files = list(np.load('../datasets/custom/labels/train/train_Y.npy'))
+        if type(self.im_files[0]) == str:
+            self.label_files = img2label_paths(self.im_files)  # labels
+        else:
+            self.label_files = list(np.load('../datasets/custom/labels/train/train_Y.npy'))
+        print(self.label_files)
+        exit()
+
         cache_path = (p if p.is_file() else Path(self.label_files[0]).parent).with_suffix('.cache')
         # self.label_files = np.load('../datasets/custom/labels/train/train_Y.npy')
         # self.im_files = np.load('../datasets/custom/images/train/train_X.npy')
