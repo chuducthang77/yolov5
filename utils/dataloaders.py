@@ -1018,8 +1018,6 @@ def verify_image_label(args):
         else:
             im = im_file.reshape(64, 64, 3)
             shape = 64, 64
-        print(shape)
-        exit()
         assert (shape[0] > 9) & (shape[1] > 9), f'image size {shape} <10 pixels'
         assert im.format.lower() in IMG_FORMATS, f'invalid image format {im.format}'
         if im.format.lower() in ('jpg', 'jpeg'):
@@ -1028,7 +1026,7 @@ def verify_image_label(args):
                 if f.read() != b'\xff\xd9':  # corrupt JPEG
                     ImageOps.exif_transpose(Image.open(im_file)).save(im_file, 'JPEG', subsampling=0, quality=100)
                     msg = f'{prefix}WARNING ⚠️ {im_file}: corrupt JPEG restored and saved'
-
+        exit()
         # verify labels
         if os.path.isfile(lb_file):
             nf = 1  # label found
