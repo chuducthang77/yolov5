@@ -497,7 +497,7 @@ class LoadImagesAndLabels(Dataset):
         if type(self.label_files[0]) == str:
             cache_path = (p if p.is_file() else Path(self.label_files[0]).parent).with_suffix('.cache')
         else:
-            cache_path = '../datasets/custom/labels/train.cache'
+            cache_path = Path('../datasets/custom/labels/train.cache')
         try:
             cache, exists = np.load(cache_path, allow_pickle=True).item(), True  # load dict
             assert cache['version'] == self.cache_version  # matches current version
