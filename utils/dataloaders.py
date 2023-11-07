@@ -498,6 +498,7 @@ class LoadImagesAndLabels(Dataset):
 
         # Display cache
         nf, nm, ne, nc, n = cache.pop('results')  # found, missing, empty, corrupt, total
+        print(nf)
         exit()
         if exists and LOCAL_RANK in {-1, 0}:
             d = f'Scanning {cache_path}... {nf} images, {nm + ne} backgrounds, {nc} corrupt'
