@@ -491,7 +491,8 @@ class LoadImagesAndLabels(Dataset):
         cache_path = (p if p.is_file() else Path(self.label_files[0]).parent).with_suffix('.cache')
         # self.label_files = np.load('../datasets/custom/labels/train/train_Y.npy')
         # self.im_files = np.load('../datasets/custom/images/train/train_X.npy')
-
+        print(p)
+        exit()
         try:
             cache, exists = np.load(cache_path, allow_pickle=True).item(), True  # load dict
             assert cache['version'] == self.cache_version  # matches current version
@@ -501,12 +502,6 @@ class LoadImagesAndLabels(Dataset):
 
         # Display cache
         nf, nm, ne, nc, n = cache.pop('results')  # found, missing, empty, corrupt, total
-        print(nf)
-        print(nm)
-        print(ne)
-        print(nc)
-        print(n)
-        exit()
 
         if exists and LOCAL_RANK in {-1, 0}:
             d = f'Scanning {cache_path}... {nf} images, {nm + ne} backgrounds, {nc} corrupt'
