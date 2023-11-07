@@ -460,8 +460,6 @@ class LoadImagesAndLabels(Dataset):
         self.stride = stride
         self.path = path
         self.albumentations = Albumentations(size=img_size) if augment else None
-        print(path)
-        exit()
         try:
             f = []  # image files
             for p in path if isinstance(path, list) else [path]:
@@ -508,6 +506,10 @@ class LoadImagesAndLabels(Dataset):
         nl = len(np.concatenate(labels, 0))  # number of labels
         assert nl > 0 or not augment, f'{prefix}All labels empty in {cache_path}, can not start training. {HELP_URL}'
         self.labels = list(labels)
+        # self.labels = np.load('../datasets/custom/labels/train/train_Y.npy')
+        print(shapes)
+        print(cache.keys())
+        exit()
         self.shapes = np.array(shapes)
         self.im_files = list(cache.keys())  # update
         self.label_files = img2label_paths(cache.keys())  # update
