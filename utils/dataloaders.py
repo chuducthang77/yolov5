@@ -528,8 +528,6 @@ class LoadImagesAndLabels(Dataset):
         self.im_files = list(cache.keys())  # update
         self.label_files = img2label_paths(cache.keys())  # update
 
-        print(len(self.shapes))
-        print('Before: ')
         # Filter images
         if min_items:
             include = np.array([len(x) >= min_items for x in self.labels]).nonzero()[0].astype(int)
@@ -549,6 +547,7 @@ class LoadImagesAndLabels(Dataset):
         self.indices = range(n)
         print(self.shapes)
         print(n)
+        print(len(self.labels))
         exit()
 
         # Update labels
