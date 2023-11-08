@@ -640,7 +640,7 @@ class LoadImagesAndLabels(Dataset):
                 nf += nf_f
                 ne += ne_f
                 nc += nc_f
-                if im_file in x.keys():
+                if str(im_file) in x.keys():
                     print('This key is duplicated.')
                 if type(im_file) == str:
                     x[im_file] = [lb, shape, segments]
