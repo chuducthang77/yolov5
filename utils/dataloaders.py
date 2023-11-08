@@ -518,6 +518,10 @@ class LoadImagesAndLabels(Dataset):
         [cache.pop(k) for k in ('version', 'msgs')]  # remove items
         # print(*cache.values())
         labels, shapes, self.segments = zip(*cache.values())
+        print(labels)
+        print(len(labels))
+        print(labels[0])
+        exit()
         nl = len(np.concatenate(labels, 0))  # number of labels
         assert nl > 0 or not augment, f'{prefix}All labels empty in {cache_path}, can not start training. {HELP_URL}'
 
@@ -641,20 +645,14 @@ class LoadImagesAndLabels(Dataset):
                 ne += ne_f
                 nc += nc_f
                 if type(im_file) == str:
-                    if im_file in x.keys():
-                        print('This key is duplicated.')
                     x[im_file] = [lb, shape, segments]
                 elif type(im_file) != str:
-                    if str(im_file) in x.keys():
-                        print('This key is duplicated.')
                     x[str(im_file)] = [lb, shape, segments]
                 if msg:
                     msgs.append(msg)
                 pbar.desc = f'{desc} {nf} images, {nm + ne} backgrounds, {nc} corrupt'
 
         pbar.close()
-        print(len(x.keys()))
-        exit()
         if msgs:
             LOGGER.info('\n'.join(msgs))
         if nf == 0:
