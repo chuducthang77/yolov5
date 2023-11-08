@@ -545,6 +545,7 @@ class LoadImagesAndLabels(Dataset):
         self.batch = bi  # batch index of image
         self.n = n
         self.indices = range(n)
+        print(self.shapes)
         print(n)
         exit()
 
