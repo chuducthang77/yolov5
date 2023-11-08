@@ -507,8 +507,6 @@ class LoadImagesAndLabels(Dataset):
 
         # Display cache
         nf, nm, ne, nc, n = cache.pop('results')  # found, missing, empty, corrupt, total
-        print(n)
-        print('before n')
         if exists and LOCAL_RANK in {-1, 0}:
             d = f'Scanning {cache_path}... {nf} images, {nm + ne} backgrounds, {nc} corrupt'
             tqdm(None, desc=prefix + d, total=n, initial=n, bar_format=TQDM_BAR_FORMAT)  # display cache results
@@ -651,6 +649,8 @@ class LoadImagesAndLabels(Dataset):
                 pbar.desc = f'{desc} {nf} images, {nm + ne} backgrounds, {nc} corrupt'
 
         pbar.close()
+        print(len(x.keys()))
+        exit()
         if msgs:
             LOGGER.info('\n'.join(msgs))
         if nf == 0:
