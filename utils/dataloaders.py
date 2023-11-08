@@ -673,7 +673,7 @@ class LoadImagesAndLabels(Dataset):
 
     def __getitem__(self, index):
         print('Fail here!!!!!')
-        exit()
+        # exit()
         index = self.indices[index]  # linear, shuffled, or image_weights
 
         hyp = self.hyp
