@@ -518,10 +518,6 @@ class LoadImagesAndLabels(Dataset):
         [cache.pop(k) for k in ('version', 'msgs')]  # remove items
         # print(*cache.values())
         labels, shapes, self.segments = zip(*cache.values())
-        print(labels)
-        print(len(labels))
-        print(labels[0])
-        exit()
         nl = len(np.concatenate(labels, 0))  # number of labels
         assert nl > 0 or not augment, f'{prefix}All labels empty in {cache_path}, can not start training. {HELP_URL}'
 
@@ -548,10 +544,6 @@ class LoadImagesAndLabels(Dataset):
         self.batch = bi  # batch index of image
         self.n = n
         self.indices = range(n)
-        print(self.shapes)
-        print(n)
-        print(len(self.labels))
-        exit()
 
         # Update labels
         include_class = []  # filter labels to include only these classes (optional)
@@ -653,10 +645,7 @@ class LoadImagesAndLabels(Dataset):
                 if msg:
                     msgs.append(msg)
                 pbar.desc = f'{desc} {nf} images, {nm + ne} backgrounds, {nc} corrupt'
-
                 i += 1
-
-            print('Final i: ', i)
 
         pbar.close()
         if msgs:
@@ -686,9 +675,6 @@ class LoadImagesAndLabels(Dataset):
 
     def __getitem__(self, index):
         index = self.indices[index]  # linear, shuffled, or image_weights
-        print(self.indices)
-        print(index)
-        exit()
         hyp = self.hyp
         mosaic = self.mosaic and random.random() < hyp['mosaic']
         if mosaic:
@@ -1049,6 +1035,10 @@ def verify_image_label(args):
             nf = 1
             lb = np.array(lb_file, dtype=np.float32)
             #Ignore the segment for the moment
+
+            print('1st counter: \n')
+            print(lb)
+            exit()
             nl = len(lb)
             if nl:
                 # assert lb.shape[1] == 5, f'labels require 5 columns, {lb.shape[1]} columns detected'
@@ -1076,6 +1066,9 @@ def verify_image_label(args):
                         segments = [np.array(x[1:], dtype=np.float32).reshape(-1, 2) for x in lb]  # (cls, xy1...)
                         lb = np.concatenate((classes.reshape(-1, 1), segments2boxes(segments)), 1)  # (cls, xywh)
                     lb = np.array(lb, dtype=np.float32)
+                    print('1st counter: \n')
+                    print(lb)
+                    exit()
                 nl = len(lb)
                 if nl:
                     assert lb.shape[1] == 5, f'labels require 5 columns, {lb.shape[1]} columns detected'
