@@ -1057,6 +1057,7 @@ def verify_image_label(args):
             return im_file, lb, shape, segments, nm, nf, ne, nc, msg
 
         else:
+            print('Hereeeeee!')
             if os.path.isfile(lb_file):
                 nf = 1  # label found
                 with open(lb_file) as f:
