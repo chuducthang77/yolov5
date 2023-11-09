@@ -500,6 +500,7 @@ class LoadImagesAndLabels(Dataset):
             cache_path = Path('../datasets/custom/labels/train.cache')
         try:
             cache, exists = np.load(cache_path, allow_pickle=True).item(), True  # load dict
+            print(' I am here!!!!!!!!')
             assert cache['version'] == self.cache_version  # matches current version
             # assert cache['hash'] == get_hash(self.label_files + self.im_files)  # identical hash
         except Exception:
