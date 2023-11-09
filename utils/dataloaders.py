@@ -639,6 +639,8 @@ class LoadImagesAndLabels(Dataset):
                         desc=desc,
                         total=len(self.im_files),
                         bar_format=TQDM_BAR_FORMAT)
+
+            i = 0
             for im_file, lb, shape, segments, nm_f, nf_f, ne_f, nc_f, msg in pbar:
                 nm += nm_f
                 nf += nf_f
@@ -647,10 +649,14 @@ class LoadImagesAndLabels(Dataset):
                 if type(im_file) == str:
                     x[im_file] = [lb, shape, segments]
                 elif type(im_file) != str:
-                    x[str(im_file)] = [lb, shape, segments]
+                    x[i] = [lb, shape, segments]
                 if msg:
                     msgs.append(msg)
                 pbar.desc = f'{desc} {nf} images, {nm + ne} backgrounds, {nc} corrupt'
+
+                i += 1
+
+            print('Final i: ', i)
 
         pbar.close()
         if msgs:
