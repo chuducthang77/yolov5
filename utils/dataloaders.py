@@ -562,9 +562,6 @@ class LoadImagesAndLabels(Dataset):
             if single_cls:  # single-class training, merge all classes into 0
                 self.labels[i][:, 0] = 0
 
-        print(self.labels)
-        exit()
-
         # Rectangular Training
         if self.rect:
             # Sort by aspect ratio
@@ -589,6 +586,14 @@ class LoadImagesAndLabels(Dataset):
                     shapes[i] = [1, 1 / mini]
 
             self.batch_shapes = np.ceil(np.array(shapes) * img_size / stride + pad).astype(int) * stride
+
+        print(len(self.im_files))
+        print(len(self.label_files))
+        print(len(labels))
+        print(self.shapes)
+        print(self.batch_shapes)
+        print(self.labels)
+        exit()
 
         # Cache images into RAM/disk for faster training
         if cache_images == 'ram' and not self.check_cache_ram(prefix=prefix):
