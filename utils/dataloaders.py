@@ -500,7 +500,6 @@ class LoadImagesAndLabels(Dataset):
             cache_path = Path('../datasets/custom/labels/train.cache')
         try:
             cache, exists = np.load(cache_path, allow_pickle=True).item(), True  # load dict
-            print(' I am here!!!!!!!!')
             assert cache['version'] == self.cache_version  # matches current version
             # assert cache['hash'] == get_hash(self.label_files + self.im_files)  # identical hash
         except Exception:
@@ -550,10 +549,6 @@ class LoadImagesAndLabels(Dataset):
         self.n = n
         self.indices = range(n)
 
-        print(self.n)
-        print(self.indices)
-        exit()
-
         # Update labels
         include_class = []  # filter labels to include only these classes (optional)
         self.segments = list(self.segments)
@@ -566,6 +561,9 @@ class LoadImagesAndLabels(Dataset):
                     self.segments[i] = [segment[idx] for idx, elem in enumerate(j) if elem]
             if single_cls:  # single-class training, merge all classes into 0
                 self.labels[i][:, 0] = 0
+
+        print(self.labels)
+        exit()
 
         # Rectangular Training
         if self.rect:
