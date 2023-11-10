@@ -773,7 +773,9 @@ class LoadImagesAndLabels(Dataset):
                 im = cv2.resize(im, (math.ceil(w0 * r), math.ceil(h0 * r)), interpolation=interp)
 
             print(h0, w0)
+            print('im')
             print(im)
+            print('im.shape[:2]')
             print(im.shape[:2])
             exit()
 
