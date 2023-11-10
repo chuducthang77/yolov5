@@ -813,13 +813,9 @@ class LoadImagesAndLabels(Dataset):
 
             # Labels
             labels, segments = self.labels[index].copy(), self.segments[index].copy()
-            print(labels)
-            print(w)
-            print(h)
-            print(padw)
-            print(padh)
-            exit()
             if labels.size:
+                print( xywhn2xyxy(labels[:, 1:], w, h, padw, padh))
+                exit()
                 labels[:, 1:] = xywhn2xyxy(labels[:, 1:], w, h, padw, padh)  # normalized xywh to pixel xyxy format
                 segments = [xyn2xy(x, w, h, padw, padh) for x in segments]
             labels4.append(labels)
