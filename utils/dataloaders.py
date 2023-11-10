@@ -530,11 +530,14 @@ class LoadImagesAndLabels(Dataset):
         print('im_files: ', self.im_files)
         print('label_files: ', self.label_files)
         self.im_files = list(cache.keys())  # update
-        self.label_files = img2label_paths(cache.keys())  # update
         print(len(self.im_files))
-        print(len(self.label_files))
         print('im_files: ', self.im_files)
-        print('label_files: ', self.label_files)
+        exit()
+        self.label_files = img2label_paths(cache.keys())  # update
+        # print(len(self.im_files))
+        # print(len(self.label_files))
+        # print('im_files: ', self.im_files)
+        # print('label_files: ', self.label_files)
         exit()
         # Filter images
         if min_items:
