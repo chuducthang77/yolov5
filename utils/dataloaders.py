@@ -596,8 +596,6 @@ class LoadImagesAndLabels(Dataset):
         else:
             self.npy_files = self.im_files
 
-        print(cache_images)
-        exit()
         if cache_images:
             b, gb = 0, 1 << 30  # bytes of cached images, bytes per gigabytes
             self.im_hw0, self.im_hw = [None] * n, [None] * n
@@ -689,6 +687,8 @@ class LoadImagesAndLabels(Dataset):
         mosaic = self.mosaic and random.random() < hyp['mosaic']
         if mosaic:
             # Load mosaic
+            print('Mosaic')
+            exit()
             img, labels = self.load_mosaic(index)
             shapes = None
 
@@ -698,6 +698,8 @@ class LoadImagesAndLabels(Dataset):
 
         else:
             # Load image
+            print('Not mosaic')
+            exit()
             img, (h0, w0), (h, w) = self.load_image(index)
 
             # Letterbox
