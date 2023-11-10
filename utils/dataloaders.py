@@ -767,6 +767,7 @@ class LoadImagesAndLabels(Dataset):
                 assert im is not None, f'Image Not Found {f}'
             # print(im.shape)
             print(type(im))
+            print(im.shape)
             print(im)
             exit()
             h0, w0 = im.shape[:2]  # orig hw
