@@ -836,8 +836,8 @@ class LoadImagesAndLabels(Dataset):
                                            shear=self.hyp['shear'],
                                            perspective=self.hyp['perspective'],
                                            border=self.mosaic_border)  # border to remove
-        print('img 4 final')
-        print(img4)
+        print('labels 4')
+        print(labels4)
         exit()
         return img4, labels4
 
