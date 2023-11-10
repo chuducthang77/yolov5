@@ -761,6 +761,7 @@ class LoadImagesAndLabels(Dataset):
             if type(fn) != str:
                 im = fn
             elif fn.exists():  # load npy
+                print('Hereeeee')
                 im = np.load(fn)
             else:  # read image
                 im = cv2.imread(f)  # BGR
