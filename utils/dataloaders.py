@@ -525,6 +525,9 @@ class LoadImagesAndLabels(Dataset):
         self.labels = list(labels)
         # self.labels = np.load('../datasets/custom/labels/train/train_Y.npy')
         self.shapes = np.array(shapes)
+
+        print('labels: ', self.labels)
+        print('shapes: ', self.shapes)
         self.im_files = list(cache.keys())  # update
         self.label_files = img2label_paths(cache.keys())  # update
 
@@ -1046,8 +1049,6 @@ def verify_image_label(args):
                 if len(i) < nl:  # duplicate row check
                     lb = lb[i]  # remove duplicates
                     msg = f'{prefix}WARNING ⚠️ {im_file}: {nl - len(i)} duplicate labels removed'
-                print(lb)
-                exit()
             else:
                 ne = 1  # label empty
                 lb = np.zeros((0, 5), dtype=np.float32)
@@ -1074,8 +1075,6 @@ def verify_image_label(args):
                         if segments:
                             segments = [segments[x] for x in i]
                         msg = f'{prefix}WARNING ⚠️ {im_file}: {nl - len(i)} duplicate labels removed'
-                    print(lb)
-                    exit()
                 else:
                     ne = 1  # label empty
                     lb = np.zeros((0, 5), dtype=np.float32)
