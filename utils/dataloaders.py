@@ -815,6 +815,7 @@ class LoadImagesAndLabels(Dataset):
             labels, segments = self.labels[index].copy(), self.segments[index].copy()
             if labels.size:
                 print(index)
+                print(w, h, padw, padh)
                 print(labels[:, 1:])
                 print( xywhn2xyxy(labels[:, 1:], w, h, padw, padh))
                 exit()
