@@ -758,9 +758,7 @@ class LoadImagesAndLabels(Dataset):
         # Loads 1 image from dataset index 'i', returns (im, original hw, resized hw)
         im, f, fn = self.ims[i], self.im_files[i], self.npy_files[i],
         if im is None:  # not cached in RAM
-            if type(fn) != str:
-                im = fn
-            elif fn.exists():  # load npy
+            if fn.exists():  # load npy
                 im = np.load(fn)
                 print('Here')
             else:  # read image
