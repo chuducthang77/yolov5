@@ -818,9 +818,6 @@ class LoadImagesAndLabels(Dataset):
                 segments = [xyn2xy(x, w, h, padw, padh) for x in segments]
             labels4.append(labels)
             segments4.extend(segments)
-            print('labels in mosaic: ')
-            print(labels)
-            exit()
 
         # Concat/clip labels
         labels4 = np.concatenate(labels4, 0)
@@ -839,7 +836,9 @@ class LoadImagesAndLabels(Dataset):
                                            shear=self.hyp['shear'],
                                            perspective=self.hyp['perspective'],
                                            border=self.mosaic_border)  # border to remove
-
+        print('img 4 final')
+        print(img4)
+        exit()
         return img4, labels4
 
     def load_mosaic9(self, index):
