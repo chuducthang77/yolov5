@@ -587,19 +587,17 @@ class LoadImagesAndLabels(Dataset):
 
             self.batch_shapes = np.ceil(np.array(shapes) * img_size / stride + pad).astype(int) * stride
 
-        print(len(self.im_files))
-        print(len(self.label_files))
-        print(len(labels))
-        print(self.shapes)
-        print(self.batch_shapes)
-        print(self.labels)
-        exit()
-
         # Cache images into RAM/disk for faster training
         if cache_images == 'ram' and not self.check_cache_ram(prefix=prefix):
             cache_images = False
         self.ims = [None] * n
-        self.npy_files = [Path(f).with_suffix('.npy') for f in self.im_files]
+        if type(self.im_files[0]) == str:
+            self.npy_files = [Path(f).with_suffix('.npy') for f in self.im_files]
+        else:
+            self.npy_files = self.im_files
+
+        print(cache_images)
+        exit()
         if cache_images:
             b, gb = 0, 1 << 30  # bytes of cached images, bytes per gigabytes
             self.im_hw0, self.im_hw = [None] * n, [None] * n
