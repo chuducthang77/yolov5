@@ -525,20 +525,13 @@ class LoadImagesAndLabels(Dataset):
         self.labels = list(labels)
         # self.labels = np.load('../datasets/custom/labels/train/train_Y.npy')
         self.shapes = np.array(shapes)
-        print(len(self.im_files))
-        print(len(self.label_files))
-        print('im_files: ', self.im_files)
-        print('label_files: ', self.label_files)
-        self.im_files = list(cache.keys())  # update
-        print(len(self.im_files))
-        print('im_files: ', self.im_files)
-        exit()
-        self.label_files = img2label_paths(cache.keys())  # update
-        # print(len(self.im_files))
-        # print(len(self.label_files))
-        # print('im_files: ', self.im_files)
-        # print('label_files: ', self.label_files)
-        exit()
+        if type(list(cache.keys())[0]) == int:
+            self.im_files = self.im_files
+            self.label_files = self.label_files
+        else:
+            self.im_files = list(cache.keys())  # update
+            self.label_files = img2label_paths(cache.keys())  # update
+
         # Filter images
         if min_items:
             include = np.array([len(x) >= min_items for x in self.labels]).nonzero()[0].astype(int)
@@ -556,6 +549,10 @@ class LoadImagesAndLabels(Dataset):
         self.batch = bi  # batch index of image
         self.n = n
         self.indices = range(n)
+
+        print(self.n)
+        print(self.indices)
+        exit()
 
         # Update labels
         include_class = []  # filter labels to include only these classes (optional)
