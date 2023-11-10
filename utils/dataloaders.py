@@ -525,8 +525,12 @@ class LoadImagesAndLabels(Dataset):
         self.labels = list(labels)
         # self.labels = np.load('../datasets/custom/labels/train/train_Y.npy')
         self.shapes = np.array(shapes)
+        print(len(self.im_files))
+        print(len(self.label_files))
         self.im_files = list(cache.keys())  # update
         self.label_files = img2label_paths(cache.keys())  # update
+        print(len(self.im_files))
+        print(len(self.label_files))
         print('im_files: ', self.im_files)
         print('label_files: ', self.label_files)
         exit()
