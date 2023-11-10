@@ -772,13 +772,6 @@ class LoadImagesAndLabels(Dataset):
                 interp = cv2.INTER_LINEAR if (self.augment or r > 1) else cv2.INTER_AREA
                 im = cv2.resize(im, (math.ceil(w0 * r), math.ceil(h0 * r)), interpolation=interp)
 
-            print(h0, w0)
-            print('im')
-            print(im)
-            print('im.shape[:2]')
-            print(im.shape[:2])
-            exit()
-
             return im, (h0, w0), im.shape[:2]  # im, hw_original, hw_resized
         return self.ims[i], self.im_hw0[i], self.im_hw[i]  # im, hw_original, hw_resized
 
@@ -825,6 +818,9 @@ class LoadImagesAndLabels(Dataset):
                 segments = [xyn2xy(x, w, h, padw, padh) for x in segments]
             labels4.append(labels)
             segments4.extend(segments)
+            print('labels in mosaic: ')
+            print(labels)
+            exit()
 
         # Concat/clip labels
         labels4 = np.concatenate(labels4, 0)
