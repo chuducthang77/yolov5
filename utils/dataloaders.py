@@ -1037,9 +1037,6 @@ def verify_image_label(args):
             lb = np.array(lb_file, dtype=np.float32)
             #Ignore the segment for the moment
 
-            print('1st counter: \n')
-            print(lb)
-            exit()
             nl = len(lb)
             if nl:
                 # assert lb.shape[1] == 5, f'labels require 5 columns, {lb.shape[1]} columns detected'
