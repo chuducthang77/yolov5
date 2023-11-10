@@ -528,6 +528,7 @@ class LoadImagesAndLabels(Dataset):
 
         print('labels: ', self.labels)
         print('shapes: ', self.shapes)
+        exit()
         self.im_files = list(cache.keys())  # update
         self.label_files = img2label_paths(cache.keys())  # update
 
