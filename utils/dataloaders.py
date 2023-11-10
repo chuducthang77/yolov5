@@ -683,12 +683,12 @@ class LoadImagesAndLabels(Dataset):
 
     def __getitem__(self, index):
         index = self.indices[index]  # linear, shuffled, or image_weights
+        print('index: ', index)
+        exit()
         hyp = self.hyp
         mosaic = self.mosaic and random.random() < hyp['mosaic']
         if mosaic:
             # Load mosaic
-            print('Mosaic')
-            exit()
             img, labels = self.load_mosaic(index)
             shapes = None
 
@@ -698,8 +698,6 @@ class LoadImagesAndLabels(Dataset):
 
         else:
             # Load image
-            print('Not mosaic')
-            exit()
             img, (h0, w0), (h, w) = self.load_image(index)
 
             # Letterbox
