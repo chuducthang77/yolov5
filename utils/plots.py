@@ -151,7 +151,7 @@ def plot_images(images, targets, paths=None, fname='images.jpg', names=None):
         annotator.rectangle([x, y, x + w, y + h], None, (255, 255, 255), width=2)  # borders
         if paths:
             if type(paths[i]) == np.ndarray:
-                annotator.text([x + 5, y + 5], text=i, txt_color=(220, 220, 220))  # filenames
+                annotator.text([x + 5, y + 5], text=str(i), txt_color=(220, 220, 220))  # filenames
             else:
                 annotator.text([x + 5, y + 5], text=Path(paths[i]).name[:40], txt_color=(220, 220, 220))  # filenames
         if len(targets) > 0:
