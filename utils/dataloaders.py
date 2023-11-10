@@ -1049,16 +1049,14 @@ def verify_image_label(args):
                 if len(i) < nl:  # duplicate row check
                     lb = lb[i]  # remove duplicates
                     msg = f'{prefix}WARNING ⚠️ {im_file}: {nl - len(i)} duplicate labels removed'
-                else:
-                    ne = 1  # label empty
-                    lb = np.zeros((0, 5), dtype=np.float32)
+                print(lb)
+                exit()
             else:
-                nm = 1  # label missing
+                ne = 1  # label empty
                 lb = np.zeros((0, 5), dtype=np.float32)
             return im_file, lb, shape, segments, nm, nf, ne, nc, msg
 
         else:
-            print('Hereeeeee!')
             if os.path.isfile(lb_file):
                 nf = 1  # label found
                 with open(lb_file) as f:
@@ -1068,9 +1066,6 @@ def verify_image_label(args):
                         segments = [np.array(x[1:], dtype=np.float32).reshape(-1, 2) for x in lb]  # (cls, xy1...)
                         lb = np.concatenate((classes.reshape(-1, 1), segments2boxes(segments)), 1)  # (cls, xywh)
                     lb = np.array(lb, dtype=np.float32)
-                    print('1st counter: \n')
-                    print(lb)
-                    exit()
                 nl = len(lb)
                 if nl:
                     assert lb.shape[1] == 5, f'labels require 5 columns, {lb.shape[1]} columns detected'
@@ -1082,6 +1077,8 @@ def verify_image_label(args):
                         if segments:
                             segments = [segments[x] for x in i]
                         msg = f'{prefix}WARNING ⚠️ {im_file}: {nl - len(i)} duplicate labels removed'
+                    print(lb)
+                    exit()
                 else:
                     ne = 1  # label empty
                     lb = np.zeros((0, 5), dtype=np.float32)
