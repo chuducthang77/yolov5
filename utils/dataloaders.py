@@ -500,6 +500,7 @@ class LoadImagesAndLabels(Dataset):
                 # print(self.label_files)
                 print('self label files')
                 print(len(self.label_files))
+                print(self.label_files[0].shape)
                 print(self.label_files[0][0].shape)
                 exit()
             else:
