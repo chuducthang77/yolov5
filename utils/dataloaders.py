@@ -500,7 +500,7 @@ class LoadImagesAndLabels(Dataset):
                 # print(self.label_files)
                 print('self label files')
                 print(len(self.label_files))
-                print(self.labels_files[0][0].shape)
+                print(self.label_files[0][0].shape)
                 exit()
             else:
                 self.label_files = list(np.load('../datasets/custom/labels/train/train_Y.npy'))
