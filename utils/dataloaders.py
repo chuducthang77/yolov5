@@ -464,8 +464,6 @@ class LoadImagesAndLabels(Dataset):
         self.stride = stride
         self.path = path
         self.albumentations = Albumentations(size=img_size) if augment else None
-        print('Helloooooo good morning')
-        exit()
         try:
             f = []  # image files
             for p in path if isinstance(path, list) else [path]:
@@ -493,6 +491,9 @@ class LoadImagesAndLabels(Dataset):
         # Check cache
         if type(self.im_files[0]) == str:
             self.label_files = img2label_paths(self.im_files)  # labels
+            print('label files')
+            print(self.label_files)
+            exit()
         else:
             self.label_files = list(np.load('../datasets/custom/labels/train/train_Y.npy'))
 
