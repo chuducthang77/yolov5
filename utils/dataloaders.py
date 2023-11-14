@@ -497,15 +497,18 @@ class LoadImagesAndLabels(Dataset):
         else:
             if 'seg' in f[0]:
                 self.label_files = list(np.load('../datasets/custom-seg/labels/train/train_Y.npy', allow_pickle=True))
-                print('Done label')
-                exit()
             else:
                 self.label_files = list(np.load('../datasets/custom/labels/train/train_Y.npy'))
 
         if type(self.label_files[0]) == str:
             cache_path = (p if p.is_file() else Path(self.label_files[0]).parent).with_suffix('.cache')
         else:
-            cache_path = Path('../datasets/custom/labels/train.cache')
+            if 'seg' in f[0]:
+                cache_path = Path('../datasets/custom-seg/labels/train.cache')
+                print('Done cache path')
+                exit()
+            else:
+                cache_path = Path('../datasets/custom/labels/train.cache')
         try:
             cache, exists = np.load(cache_path, allow_pickle=True).item(), True  # load dict
             assert cache['version'] == self.cache_version  # matches current version
