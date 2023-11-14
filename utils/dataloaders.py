@@ -486,8 +486,6 @@ class LoadImagesAndLabels(Dataset):
             else:
                 if 'seg' in f[0]:
                     self.im_files = list(np.load('../datasets/custom-seg/images/train/train_X.npy'))
-                    print('Done')
-                    exit()
                 else:
                     self.im_files = list(np.load('../datasets/custom/images/train/train_X.npy'))
             assert self.im_files, f'{prefix}No images found'
@@ -497,7 +495,12 @@ class LoadImagesAndLabels(Dataset):
         if type(self.im_files[0]) == str:
             self.label_files = img2label_paths(self.im_files)  # labels
         else:
-            self.label_files = list(np.load('../datasets/custom/labels/train/train_Y.npy'))
+            if 'seg' in f[0]:
+                self.label_files = list(np.load('../datasets/custom-seg/labels/train/train_Y.npy'))
+                print('Done label')
+                exit()
+            else:
+                self.label_files = list(np.load('../datasets/custom/labels/train/train_Y.npy'))
 
         if type(self.label_files[0]) == str:
             cache_path = (p if p.is_file() else Path(self.label_files[0]).parent).with_suffix('.cache')
