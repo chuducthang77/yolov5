@@ -499,6 +499,9 @@ class LoadImagesAndLabels(Dataset):
                 self.label_files = list(np.load('../datasets/custom-seg/labels/train/train_Y.npy', allow_pickle=True))
                 print(self.label_files)
                 print('self label files')
+                print(len(self.label_files))
+                print(self.label_files.shape)
+                print(self.labels_files[0, 0].shape)
                 exit()
             else:
                 self.label_files = list(np.load('../datasets/custom/labels/train/train_Y.npy'))
