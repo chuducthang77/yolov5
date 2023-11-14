@@ -464,6 +464,8 @@ class LoadImagesAndLabels(Dataset):
         self.stride = stride
         self.path = path
         self.albumentations = Albumentations(size=img_size) if augment else None
+        print('Helloooooo good morning')
+        exit()
         try:
             f = []  # image files
             for p in path if isinstance(path, list) else [path]:

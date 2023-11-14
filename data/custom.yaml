@@ -1,6 +1,6 @@
 path: ../datasets/custom  # dataset root dir
-train: images/train  # train images (relative to 'path') 128 images
-val: images/valid  # val images (relative to 'path') 128 images
+train: images/train  # train images
+val: images/valid  # val images
 test:  # test images (optional)
 
 # Classes
