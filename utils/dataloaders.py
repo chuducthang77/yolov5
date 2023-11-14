@@ -484,9 +484,12 @@ class LoadImagesAndLabels(Dataset):
                 self.im_files = sorted(x.replace('/', os.sep) for x in f if x.split('.')[-1].lower() in IMG_FORMATS)
             # self.img_files = sorted([x for x in f if x.suffix[1:].lower() in IMG_FORMATS])  # pathlib
             else:
-                print(f[0])
-                exit()
-                self.im_files = list(np.load('../datasets/custom/images/train/train_X.npy'))
+                if 'seg' in f[0]:
+                    self.im_files = list(np.load('../datasets/custom-seg/images/train/train_X.npy'))
+                    print('Done')
+                    exit()
+                else:
+                    self.im_files = list(np.load('../datasets/custom/images/train/train_X.npy'))
             assert self.im_files, f'{prefix}No images found'
         except Exception as e:
             raise Exception(f'{prefix}Error loading data from {path}: {e}\n{HELP_URL}') from e
