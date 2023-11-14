@@ -497,6 +497,9 @@ class LoadImagesAndLabels(Dataset):
         else:
             if 'seg' in f[0]:
                 self.label_files = list(np.load('../datasets/custom-seg/labels/train/train_Y.npy', allow_pickle=True))
+                print(self.label_files)
+                print('self label files')
+                exit()
             else:
                 self.label_files = list(np.load('../datasets/custom/labels/train/train_Y.npy'))
 
@@ -505,8 +508,6 @@ class LoadImagesAndLabels(Dataset):
         else:
             if 'seg' in f[0]:
                 cache_path = Path('../datasets/custom-seg/labels/train.cache')
-                print('Done cache path')
-                exit()
             else:
                 cache_path = Path('../datasets/custom/labels/train.cache')
         try:
