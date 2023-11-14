@@ -496,7 +496,7 @@ class LoadImagesAndLabels(Dataset):
             self.label_files = img2label_paths(self.im_files)  # labels
         else:
             if 'seg' in f[0]:
-                self.label_files = list(np.load('../datasets/custom-seg/labels/train/train_Y.npy'))
+                self.label_files = list(np.load('../datasets/custom-seg/labels/train/train_Y.npy', allow_pickle=False))
                 print('Done label')
                 exit()
             else:
