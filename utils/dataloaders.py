@@ -482,6 +482,8 @@ class LoadImagesAndLabels(Dataset):
             # f is a list contain image filename
             if f[0].split('.')[-1].lower() == 'jpeg' or  f[0].split('.')[-1].lower() == 'jpg':
                 self.im_files = sorted(x.replace('/', os.sep) for x in f if x.split('.')[-1].lower() in IMG_FORMATS)
+                print(f[0].split('.'))
+                exit()
             # self.img_files = sorted([x for x in f if x.suffix[1:].lower() in IMG_FORMATS])  # pathlib
             else:
                 self.im_files = list(np.load('../datasets/custom/images/train/train_X.npy'))
@@ -491,9 +493,6 @@ class LoadImagesAndLabels(Dataset):
         # Check cache
         if type(self.im_files[0]) == str:
             self.label_files = img2label_paths(self.im_files)  # labels
-            print('label files')
-            print(self.label_files)
-            exit()
         else:
             self.label_files = list(np.load('../datasets/custom/labels/train/train_Y.npy'))
 
