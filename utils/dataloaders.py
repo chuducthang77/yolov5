@@ -657,8 +657,8 @@ class LoadImagesAndLabels(Dataset):
                 nf += nf_f
                 ne += ne_f
                 nc += nc_f
-                print(lb)
-                print('cache label lb')
+                print(segments)
+                print('cache label segments')
                 exit()
                 if type(im_file) == str:
                     x[im_file] = [lb, shape, segments]
