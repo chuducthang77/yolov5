@@ -1066,15 +1066,14 @@ def verify_image_label(args):
                 lb = np.array(lb_file, dtype=np.float32)
             #Ignore the segment for the moment
             else:
-                print('seg is everywhere')
-                exit()
-                with open(lb_file) as f:
-                    lb = [x.split() for x in f.read().strip().splitlines() if len(x)]
-                    if any(len(x) > 6 for x in lb):  # is segment
-                        classes = np.array([x[0] for x in lb], dtype=np.float32)
-                        segments = [np.array(x[1:], dtype=np.float32).reshape(-1, 2) for x in lb]  # (cls, xy1...)
-                        lb = np.concatenate((classes.reshape(-1, 1), segments2boxes(segments)), 1)  # (cls, xywh)
-                    lb = np.array(lb, dtype=np.float32)
+                lb = [x.split() for x in f.read().strip().splitlines() if len(x)]
+                if any(len(x) > 6 for x in lb):  # is segment
+                    classes = np.array([x[0] for x in lb], dtype=np.float32)
+                    segments = [np.array(x[1:], dtype=np.float32).reshape(-1, 2) for x in lb]  # (cls, xy1...)
+                    lb = np.concatenate((classes.reshape(-1, 1), segments2boxes(segments)), 1)  # (cls, xywh)
+                lb = np.array(lb, dtype=np.float32)
+
+
             nl = len(lb)
             if nl:
                 # assert lb.shape[1] == 5, f'labels require 5 columns, {lb.shape[1]} columns detected'
@@ -1094,6 +1093,9 @@ def verify_image_label(args):
                 nf = 1  # label found
                 with open(lb_file) as f:
                     lb = [x.split() for x in f.read().strip().splitlines() if len(x)]
+                    print(lb)
+                    print('coco lb')
+                    exit()
                     if any(len(x) > 6 for x in lb):  # is segment
                         classes = np.array([x[0] for x in lb], dtype=np.float32)
                         segments = [np.array(x[1:], dtype=np.float32).reshape(-1, 2) for x in lb]  # (cls, xy1...)
