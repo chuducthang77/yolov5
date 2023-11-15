@@ -501,7 +501,9 @@ class LoadImagesAndLabels(Dataset):
                 self.label_files = list(np.load('../datasets/custom/labels/train/train_Y.npy'))
 
 
-        print(self.label_files)
+        print(self.label_files[0])
+        print(type(self.label_files))
+        print(type(self.label_files[0]))
         exit()
         if type(self.label_files[0]) == str:
             cache_path = (p if p.is_file() else Path(self.label_files[0]).parent).with_suffix('.cache')
