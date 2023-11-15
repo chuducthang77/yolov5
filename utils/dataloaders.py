@@ -1060,8 +1060,6 @@ def verify_image_label(args):
         # exit()
         if type(lb_file) != str:
             nf = 1
-            print('hereeeee')
-            exit()
             lb = np.array(lb_file, dtype=np.float32)
             #Ignore the segment for the moment
             print(lb)
