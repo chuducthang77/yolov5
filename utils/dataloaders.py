@@ -480,6 +480,7 @@ class LoadImagesAndLabels(Dataset):
                 else:
                     raise FileNotFoundError(f'{prefix}{p} does not exist')
             # f is a list contain image filename
+            self.f = f[0]
             if f[0].split('.')[-1].lower() == 'jpeg' or  f[0].split('.')[-1].lower() == 'jpg':
                 self.im_files = sorted(x.replace('/', os.sep) for x in f if x.split('.')[-1].lower() in IMG_FORMATS)
             # self.img_files = sorted([x for x in f if x.suffix[1:].lower() in IMG_FORMATS])  # pathlib
@@ -645,7 +646,7 @@ class LoadImagesAndLabels(Dataset):
         desc = f'{prefix}Scanning {path.parent / path.stem}...'
         # print(self.label_files)
         with Pool(NUM_THREADS) as pool:
-            pbar = tqdm(pool.imap(verify_image_label, zip(self.im_files, self.label_files, repeat(prefix))),
+            pbar = tqdm(pool.imap(verify_image_label, zip(self.im_files, self.label_files, repeat(prefix), repeat(self.f))),
                         desc=desc,
                         total=len(self.im_files),
                         bar_format=TQDM_BAR_FORMAT)
@@ -1034,7 +1035,7 @@ def autosplit(path=DATASETS_DIR / 'coco128/images', weights=(0.9, 0.1, 0.0), ann
 
 def verify_image_label(args):
     # Verify one image-label pair
-    im_file, lb_file, prefix = args
+    im_file, lb_file, prefix, f = args
     nm, nf, ne, nc, msg, segments = 0, 0, 0, 0, '', []  # number (missing, found, empty, corrupt), message, segments
     try:
         # verify images
@@ -1060,11 +1061,20 @@ def verify_image_label(args):
         # exit()
         if type(lb_file) != str:
             nf = 1
-            lb = lb_file
-            # lb = np.array(lb_file, dtype=np.float32)
+            if 'seg' not in f:
+                # lb = lb_file
+                lb = np.array(lb_file, dtype=np.float32)
+                print('f is everywhere')
             #Ignore the segment for the moment
+            else:
+                with open(lb_file) as f:
+                    lb = [x.split() for x in f.read().strip().splitlines() if len(x)]
+                    if any(len(x) > 6 for x in lb):  # is segment
+                        classes = np.array([x[0] for x in lb], dtype=np.float32)
+                        segments = [np.array(x[1:], dtype=np.float32).reshape(-1, 2) for x in lb]  # (cls, xy1...)
+                        lb = np.concatenate((classes.reshape(-1, 1), segments2boxes(segments)), 1)  # (cls, xywh)
+                    lb = np.array(lb, dtype=np.float32)
             nl = len(lb)
-            exit()
             if nl:
                 # assert lb.shape[1] == 5, f'labels require 5 columns, {lb.shape[1]} columns detected'
                 # assert (lb >= 0).all(), f'negative label values {lb[lb < 0]}'
