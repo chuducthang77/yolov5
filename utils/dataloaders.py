@@ -1094,6 +1094,7 @@ def verify_image_label(args):
                 with open(lb_file) as f:
                     lb = [x.split() for x in f.read().strip().splitlines() if len(x)]
                     print(lb)
+                    print(len(lb))
                     print('coco lb')
                     exit()
                     if any(len(x) > 6 for x in lb):  # is segment
