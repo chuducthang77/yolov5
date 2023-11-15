@@ -1064,10 +1064,10 @@ def verify_image_label(args):
             if 'seg' not in f:
                 # lb = lb_file
                 lb = np.array(lb_file, dtype=np.float32)
-                print('f is everywhere')
-                exit()
             #Ignore the segment for the moment
             else:
+                print('seg is everywhere')
+                exit()
                 with open(lb_file) as f:
                     lb = [x.split() for x in f.read().strip().splitlines() if len(x)]
                     if any(len(x) > 6 for x in lb):  # is segment
