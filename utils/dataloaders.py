@@ -1056,6 +1056,7 @@ def verify_image_label(args):
         # verify labels
         print(lb_file)
         print(type(lb_file))
+        print(type(lb_file) != str)
         exit()
         if type(lb_file) != str:
             nf = 1
