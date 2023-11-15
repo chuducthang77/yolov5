@@ -1035,8 +1035,6 @@ def verify_image_label(args):
     # Verify one image-label pair
     im_file, lb_file, prefix = args
     nm, nf, ne, nc, msg, segments = 0, 0, 0, 0, '', []  # number (missing, found, empty, corrupt), message, segments
-    print('Hello again and again')
-    exit()
     try:
         # verify images
         if 'jpg' in im_file:
@@ -1055,6 +1053,8 @@ def verify_image_label(args):
         #             ImageOps.exif_transpose(Image.open(im_file)).save(im_file, 'JPEG', subsampling=0, quality=100)
         #             msg = f'{prefix}WARNING ⚠️ {im_file}: corrupt JPEG restored and saved'
         # verify labels
+        print('balabumbubm')
+        exit()
         if type(lb_file) != str:
             nf = 1
             lb = np.array(lb_file, dtype=np.float32)
