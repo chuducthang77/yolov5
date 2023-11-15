@@ -1065,6 +1065,7 @@ def verify_image_label(args):
                 # lb = lb_file
                 lb = np.array(lb_file, dtype=np.float32)
                 print('f is everywhere')
+                exit()
             #Ignore the segment for the moment
             else:
                 with open(lb_file) as f:
@@ -1090,8 +1091,6 @@ def verify_image_label(args):
 
         else:
             if os.path.isfile(lb_file):
-                print('text file here')
-                exit()
                 nf = 1  # label found
                 with open(lb_file) as f:
                     lb = [x.split() for x in f.read().strip().splitlines() if len(x)]
