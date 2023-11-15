@@ -497,12 +497,6 @@ class LoadImagesAndLabels(Dataset):
         else:
             if 'seg' in f[0]:
                 self.label_files = list(np.load('../datasets/custom-seg/labels/train/train_Y.npy', allow_pickle=True))
-                # print(self.label_files)
-                print('self label files')
-                print(len(self.label_files))
-                print(self.label_files[0].shape)
-                print(self.label_files[0][0].shape)
-                exit()
             else:
                 self.label_files = list(np.load('../datasets/custom/labels/train/train_Y.npy'))
 
@@ -1080,6 +1074,8 @@ def verify_image_label(args):
 
         else:
             if os.path.isfile(lb_file):
+                print('Hellooo i am here')
+                exit()
                 nf = 1  # label found
                 with open(lb_file) as f:
                     lb = [x.split() for x in f.read().strip().splitlines() if len(x)]
