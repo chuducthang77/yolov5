@@ -1069,10 +1069,11 @@ def verify_image_label(args):
                 lb = lb_file
                 classes = np.array([x[0] for x in lb], dtype=np.float32)
 
-                print(classes)
-                print('class in custom')
-                exit()
                 segments = [np.array(x[1:], dtype=np.float32).reshape(-1, 2) for x in lb]  # (cls, xy1...)
+                print(segments)
+                print('segments in custom')
+                print(type(segments))
+                exit()
                 lb = np.concatenate((classes.reshape(-1, 1), segments2boxes(segments)), 1)  # (cls, xywh)
                 lb = np.array(lb, dtype=np.float32)
 
@@ -1098,10 +1099,11 @@ def verify_image_label(args):
                     lb = [x.split() for x in f.read().strip().splitlines() if len(x)]
                     if any(len(x) > 6 for x in lb):  # is segment
                         classes = np.array([x[0] for x in lb], dtype=np.float32)
-                        print(classes)
-                        print('class in coco')
-                        exit()
                         segments = [np.array(x[1:], dtype=np.float32).reshape(-1, 2) for x in lb]  # (cls, xy1...)
+                        print(segments)
+                        print('segments in coco')
+                        print(type(segments))
+                        exit()
                         lb = np.concatenate((classes.reshape(-1, 1), segments2boxes(segments)), 1)  # (cls, xywh)
                     lb = np.array(lb, dtype=np.float32)
                 nl = len(lb)
