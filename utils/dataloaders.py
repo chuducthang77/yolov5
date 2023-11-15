@@ -501,11 +501,6 @@ class LoadImagesAndLabels(Dataset):
                 self.label_files = list(np.load('../datasets/custom/labels/train/train_Y.npy'))
 
 
-        print(self.label_files[0])
-        print(type(self.label_files))
-        print(type(self.label_files[0]))
-        print(type(self.label_files[0][0]))
-        exit()
         if type(self.label_files[0]) == str:
             cache_path = (p if p.is_file() else Path(self.label_files[0]).parent).with_suffix('.cache')
         else:
@@ -1059,6 +1054,9 @@ def verify_image_label(args):
         #             ImageOps.exif_transpose(Image.open(im_file)).save(im_file, 'JPEG', subsampling=0, quality=100)
         #             msg = f'{prefix}WARNING ⚠️ {im_file}: corrupt JPEG restored and saved'
         # verify labels
+        print(lb_file)
+        print(type(lb_file))
+        exit()
         if type(lb_file) != str:
             nf = 1
             lb = np.array(lb_file, dtype=np.float32)
