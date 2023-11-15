@@ -535,11 +535,9 @@ class LoadImagesAndLabels(Dataset):
         self.labels = list(labels)
         # self.labels = np.load('../datasets/custom/labels/train/train_Y.npy')
         self.shapes = np.array(shapes)
-        if type(list(cache.keys())[0]) == int:
+        if type(list(cache.keys())[0]) == int: # Custom
             self.im_files = self.im_files
             self.label_files = self.label_files
-            print('Custom is here')
-            exit()
         else:
             self.im_files = list(cache.keys())  # update
             self.label_files = img2label_paths(cache.keys())  # update
