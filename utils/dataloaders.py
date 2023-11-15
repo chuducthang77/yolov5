@@ -657,6 +657,9 @@ class LoadImagesAndLabels(Dataset):
                 nf += nf_f
                 ne += ne_f
                 nc += nc_f
+                print(lb)
+                print('cache label lb')
+                exit()
                 if type(im_file) == str:
                     x[im_file] = [lb, shape, segments]
                 elif type(im_file) != str:
@@ -1055,10 +1058,7 @@ def verify_image_label(args):
         #             ImageOps.exif_transpose(Image.open(im_file)).save(im_file, 'JPEG', subsampling=0, quality=100)
         #             msg = f'{prefix}WARNING ⚠️ {im_file}: corrupt JPEG restored and saved'
         # verify labels
-        # print(lb_file)
-        # print(type(lb_file))
-        # print(type(lb_file) != str)
-        # exit()
+
         if type(lb_file) != str:
             nf = 1
             if 'seg' not in f:
@@ -1071,10 +1071,6 @@ def verify_image_label(args):
 
                 segments = [np.array(x[1:], dtype=np.float32).reshape(-1, 2) for x in lb]  # (cls, xy1...)
                 lb = np.concatenate((classes.reshape(-1, 1), segments2boxes(segments)), 1)  # (cls, xywh)
-                print(lb)
-                print('lb in custom')
-                print(type(lb))
-                exit()
                 lb = np.array(lb, dtype=np.float32)
 
 
@@ -1086,6 +1082,8 @@ def verify_image_label(args):
                 _, i = np.unique(lb, axis=0, return_index=True)
                 if len(i) < nl:  # duplicate row check
                     lb = lb[i]  # remove duplicates
+                    if segments:
+                        segments = [segments[x] for x in i]
                     msg = f'{prefix}WARNING ⚠️ {im_file}: {nl - len(i)} duplicate labels removed'
             else:
                 ne = 1  # label empty
@@ -1101,10 +1099,6 @@ def verify_image_label(args):
                         classes = np.array([x[0] for x in lb], dtype=np.float32)
                         segments = [np.array(x[1:], dtype=np.float32).reshape(-1, 2) for x in lb]  # (cls, xy1...)
                         lb = np.concatenate((classes.reshape(-1, 1), segments2boxes(segments)), 1)  # (cls, xywh)
-                        print(lb)
-                        print('lb in coco')
-                        print(type(lb))
-                        exit()
                     lb = np.array(lb, dtype=np.float32)
                 nl = len(lb)
                 if nl:
