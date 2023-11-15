@@ -515,6 +515,8 @@ class LoadImagesAndLabels(Dataset):
             # assert cache['hash'] == get_hash(self.label_files + self.im_files)  # identical hash
         except Exception:
             cache, exists = self.cache_labels(cache_path, prefix), False  # run cache ops
+            print('Well done')
+            exit()
 
         # Display cache
         nf, nm, ne, nc, n = cache.pop('results')  # found, missing, empty, corrupt, total
@@ -657,10 +659,6 @@ class LoadImagesAndLabels(Dataset):
                 nf += nf_f
                 ne += ne_f
                 nc += nc_f
-                print(len(lb))
-                print(len(segments))
-                print('cache label segments')
-                exit()
                 if type(im_file) == str:
                     x[im_file] = [lb, shape, segments]
                 elif type(im_file) != str:
