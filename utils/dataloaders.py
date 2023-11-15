@@ -515,8 +515,6 @@ class LoadImagesAndLabels(Dataset):
             # assert cache['hash'] == get_hash(self.label_files + self.im_files)  # identical hash
         except Exception:
             cache, exists = self.cache_labels(cache_path, prefix), False  # run cache ops
-            print('Well done')
-            exit()
 
         # Display cache
         nf, nm, ne, nc, n = cache.pop('results')  # found, missing, empty, corrupt, total
@@ -543,6 +541,9 @@ class LoadImagesAndLabels(Dataset):
         else:
             self.im_files = list(cache.keys())  # update
             self.label_files = img2label_paths(cache.keys())  # update
+            print(self.label_files)
+            print('Double check')
+            exit()
 
         # Filter images
         if min_items:
