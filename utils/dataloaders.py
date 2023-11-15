@@ -1054,12 +1054,14 @@ def verify_image_label(args):
         #             ImageOps.exif_transpose(Image.open(im_file)).save(im_file, 'JPEG', subsampling=0, quality=100)
         #             msg = f'{prefix}WARNING ⚠️ {im_file}: corrupt JPEG restored and saved'
         # verify labels
-        print(lb_file)
-        print(type(lb_file))
-        print(type(lb_file) != str)
-        exit()
+        # print(lb_file)
+        # print(type(lb_file))
+        # print(type(lb_file) != str)
+        # exit()
         if type(lb_file) != str:
             nf = 1
+            print('hereeeee')
+            exit()
             lb = np.array(lb_file, dtype=np.float32)
             #Ignore the segment for the moment
             print(lb)
